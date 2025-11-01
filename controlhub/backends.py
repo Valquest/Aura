@@ -4,27 +4,34 @@ from django.db.models import Q
 
 User = get_user_model()
 
-class EmailOrUsernameModelBackend(ModelBackend):
+class CustomAuthenticationModelBackend(ModelBackend):
     """
     Custom backend: Authenticates using either email or username.
     """
     def authenticate(self, request, username_email=None, password=None, **kwargs):
         if username_email is None:
-            username_email = kwargs.get('username')
+            username_email = kwargs.get(User.USERNAME_FIELD or 'username')
+        if username_email is None or password is None:
+            return None
+        
+        username_email_lower = username_email.lower()
+
+        if '@' in username_email_lower:
             username = ''
+            email = username_email_lower
+        else:
             email = ''
-            if '@' in username_email:
-                email = username_email
-            else:
-                username = username_email
+            username = username_email_lower
 
         try:
             # Try username first, then email
-            user = User.objects.get(Q(username=username) | Q(email=email))
+            user = User.objects.get(Q(username__iexact=username) | Q(email__iexact=email))
         except User.DoesNotExist:
+            # Run the default password hasher once to reduce timing attacks
+            User().set_password(password)
             return None
         
-        if user.check_password(password):
+        if user.check_password(password) and self.user_can_authenticate(user):
             return user
         return None
     

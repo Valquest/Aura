@@ -103,7 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    'controlhub.backends.EmailOrUsernameModelBackend',
+    'controlhub.backends.CustomAuthenticationModelBackend',
     'django.contrib.auth.backends.ModelBackend'
 ]
 
