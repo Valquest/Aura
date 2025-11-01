@@ -1,0 +1,31 @@
+{% extends 'controlhub/layout.html' %}
+{% load static %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block login_body %}
+<div class="d-flex justify-content-center align-items-center vh-100 bg-dark">
+    <form data-np-autofill-form-type="login" data-np-checked="1" data-np-watching="1"> 
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <div class="row align-items-center justify-content-center">
+                <img class="mb-4" src='{% static "controlhub/images/logo/Aura-logo-transparent-white.png" %}' alt="" height="57">
+            </div>
+            <div class="row align-items-center justify-content-center">
+                <h1 class="h3 mb-3 fw-normal text-white">Please sign in</h1> 
+            </div>
+        </div>
+        <div class="form-floating"> 
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" data-np-autofill-field-type="username" data-np-uid="c69fa74e-853b-4316-ab26-b65eada39796"> 
+            <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating mb-3"> 
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" data-np-autofill-field-type="password" data-np-uid="859f345e-cee3-4e4e-8595-85edb3efce59"> 
+            <label for="floatingPassword">Password</label> 
+        </div>
+        <button class="btn btn-primary w-100 py-2 mb-2" type="submit">Sign in</button>
+        <button class="btn btn-primary w-100 py-2" type="submit">Register</button>
+    </form>
+</div>
+{% endblock %}
