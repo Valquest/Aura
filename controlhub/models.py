@@ -57,6 +57,14 @@ class User(AbstractUser):
     """
     Standart user model with additional value for user type
     """
+
+    TYPE_CHOICES = (
+        ('admin', 'Admin'),
+        ('user', 'User'),
+        ('creator', 'Creator'),
+        ('guest', 'Guest'),
+    )
+
     # Defines account type in the system
     type = models.CharField(max_length=7) # admin, user, creator, guest
 

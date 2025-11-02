@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
+from controlhub.models import User
 
 
 def index(request):
@@ -37,4 +38,37 @@ def login_view(request):
     return render(request, 'controlhub/login.html')
         
 def register(request):
-    pass
+
+    if request.method == "POST":
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        password_reentry = request.POST.get('password_two')
+
+        if username is '' or email is '':
+            context = {
+                'error': 'Must enter username and email'
+            }
+            return render(request, 'controlhub/register.html', context)
+
+        if password != password_reentry:
+            context = {
+                'error': 'Passwords did not match.',
+                'username': username,
+                'email': email
+            }
+            return render(request, 'controlhub/register.html', context)
+        
+        user_exists_username = User.objects.filter(username=username).exists()
+        user_exists_email = User.objects.filter(email=email).exists()
+        if user_exists_username or user_exists_email:
+            return render(request, 'controlhub/register.html', {'error': 'Username or Email already in use.'})
+        
+        print('doing this')
+        new_user = User.objects.create_user(username=username, email=email, password=password)
+        new_user.save()
+
+        print('new user created')
+        return redirect('login')
+
+    return render(request, 'controlhub/register.html')
