@@ -8,9 +8,9 @@ __pycache__/
 *.egg-info/
 .installed.cfg
 *.egg
-MANIFEST
 
 # Virtual environments
+.venv/
 venv/
 env/
 ENV/
@@ -35,12 +35,14 @@ staticfiles/
 *.swo
 *~
 
-# OS
+# macOS
 .DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
+
+# Windows
 ehthumbs.db
 Thumbs.db
 
@@ -52,10 +54,8 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *.cover
-*.py,cover
 .hypothesis/
 .pytest_cache/
 
 # Deployment
-.DS_Store
 *.env
