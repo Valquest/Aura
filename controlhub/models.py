@@ -12,7 +12,7 @@ class Device(models.Model):
     type = models.CharField(max_length=4)
     model = models.CharField(max_length=50)
     location = models.CharField(max_length=100)
-    last_seen = models.DateTimeField(auto_now=False)
+    last_seen = models.DateTimeField(auto_now=False, null=True)
     is_active = models.BooleanField(default=1)
 
     def __str__(self):
