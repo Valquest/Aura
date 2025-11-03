@@ -44,6 +44,11 @@ justify-content: center;
 font-size: 1.5rem; /* For icons/emojis inside */
 }
 
-@media (min-width: 768px) {
-    .custom-row { max-width: 800px; } /* Caps at 8-10 items on md+ */
+.custom-row {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media (min-width: 768.98px) {
+    .custom-row { margin-left: 0.5rem; } /* Caps at 8-10 items on md+ */
 }
