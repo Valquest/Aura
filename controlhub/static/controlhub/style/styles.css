@@ -16,3 +16,8 @@
     border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
 }
+
+form {
+    max-width: 400px;
+    min-width: 280px;
+}
