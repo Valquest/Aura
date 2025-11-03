@@ -2,6 +2,8 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from controlhub.models import User, UserDeviceAccess, Device
 
+def device_ctrl_page(request, device_id):
+    return render(request, 'controlhub/device_ctrl_page.html')
 
 def index(request):
     """
@@ -15,15 +17,14 @@ def index(request):
     user_access = UserDeviceAccess.objects.filter(user=request.user)
     print(user_access)
 
-    buttons = []
+    context = {}
+    context['devices'] = {}
 
     for access in user_access:
-        device = Device.objects.get(id=access.device.id)
-        buttons.append(device.name)
+        device_name = Device.objects.get(id=access.device.id).name
+        device_id = Device.objects.get(id=access.device.id).id
 
-    context = {
-        'buttons': buttons
-    }
+        context['devices'][device_id] = device_name
 
     return render(request, 'controlhub/index.html', context)
 

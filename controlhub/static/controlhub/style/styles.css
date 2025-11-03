@@ -24,7 +24,7 @@ form {
 
 .button-item {
     text-align: center;
-    max-width: 100px; /* Keeps text block compact; adjust based on your col widths */
+    max-width: 100px;
   }
 
 .button-label {
@@ -32,7 +32,7 @@ width: 100%;
 white-space: nowrap;
 overflow: hidden;
 text-overflow: ellipsis;
-font-size: 0.875rem; /* Smaller text for mobile */
+font-size: 0.875rem;
 }
 
 .btn-circle {
@@ -42,6 +42,11 @@ display: flex;
 align-items: center;
 justify-content: center;
 font-size: 1.5rem; /* For icons/emojis inside */
+}
+
+.ctrl-btn {
+    width: 150px !important;
+    height: 150px !important;
 }
 
 .custom-row {
