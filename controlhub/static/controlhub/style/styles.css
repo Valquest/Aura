@@ -21,3 +21,29 @@ form {
     max-width: 400px;
     min-width: 280px;
 }
+
+.button-item {
+    text-align: center;
+    max-width: 100px; /* Keeps text block compact; adjust based on your col widths */
+  }
+
+.button-label {
+width: 100%;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+font-size: 0.875rem; /* Smaller text for mobile */
+}
+
+.btn-circle {
+width: 60px;
+height: 60px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.5rem; /* For icons/emojis inside */
+}
+
+@media (min-width: 768px) {
+    .custom-row { max-width: 800px; } /* Caps at 8-10 items on md+ */
+}

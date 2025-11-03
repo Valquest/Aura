@@ -1,7 +1,6 @@
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
-from controlhub.models import User
+from django.shortcuts import render, redirect
+from controlhub.models import User, UserDeviceAccess, Device
 
 
 def index(request):
@@ -12,7 +11,21 @@ def index(request):
     # If user is not logged in, redirect to a login page
     if not request.user.is_authenticated:
         return redirect('login')
-    return render(request, 'controlhub/index.html')
+    
+    user_access = UserDeviceAccess.objects.filter(user=request.user)
+    print(user_access)
+
+    buttons = []
+
+    for access in user_access:
+        device = Device.objects.get(id=access.device.id)
+        buttons.append(device.name)
+
+    context = {
+        'buttons': buttons
+    }
+
+    return render(request, 'controlhub/index.html', context)
 
 def login_view(request):
     """

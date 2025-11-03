@@ -5,5 +5,23 @@ Index
 {% endblock %}
 
 {% block body %}
-    <h1 text-white>Index page here</h1>
+    <div class="container py-4">
+        <div class="d-flex justify-content-center">
+            <h2 class="m-3 mb-5">Aura device hub</h2>
+        </div>
+        <div class="row g-3 justify-content custom-row mx-auto" id="console-row">
+            {% for button_text in buttons %}
+                <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2">
+                    <div class="button-item">
+                        <a href="#" class="btn btn-outline-primary btn-circle rounded-circle mb-2 d-block mx-auto" aria-label="{{ button_text }}">
+                            {{ button_text|slice:":1"|upper }}
+                        </a>
+                        <div class="button-label"> {{ button_text|truncatechars:12 }}</div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12 text-center text-muted">No buttons available.</div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
