@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from controlhub.models import User, UserDeviceAccess, Device
 
@@ -51,6 +51,14 @@ def login_view(request):
     
     return render(request, 'controlhub/login.html')
         
+def logout_view(request):
+    """
+    Logout logic
+    """
+    logout(request)
+    return redirect('login')
+
+
 def register(request):
 
     if request.method == "POST":

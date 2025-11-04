@@ -57,3 +57,33 @@ font-size: 1.5rem; /* For icons/emojis inside */
 @media (min-width: 768.98px) {
     .custom-row { margin-left: 0.5rem; } /* Caps at 8-10 items on md+ */
 }
+
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background: rgba(38, 41, 51, 0.2) !important;
+        border-radius: 0.2rem 0.2rem 0.5rem 0.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1rem;
+        margin-top: 0.6rem;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 0.5rem 1rem;
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+}
+
+.nav-bar-icon {
+    width:35px;
+    height:35px;
+    margin-right: 0.5rem
+}
+
+.nav-bar-brand-title {
+    font-size: 21pt;
+}
+
+.navbar {
+    background-color: rgba(38, 41, 51, 0.6);
+    backdrop-filter: blur(3px);
+}
