@@ -12,6 +12,7 @@ class Device(models.Model):
     type = models.CharField(max_length=4)
     model = models.CharField(max_length=50)
     location = models.CharField(max_length=100)
+    ip = models.GenericIPAddressField(null=True, blank=True)
     last_seen = models.DateTimeField(auto_now=False, null=True)
     is_active = models.BooleanField(default=1)
 
@@ -52,6 +53,16 @@ class Connection(models.Model):
     
     def __str__(self):
         return f"{self.outter_node} <-> {self.inner_node}"
+
+class DeviceActions(models.Model):
+    """
+    This model handles http endpoints and action that was called state
+    """
+    device = models.ForeignKey(Device, on_delete=models.CASCADE)
+    end_point = models.CharField(max_length=64)
+    button_name = models.CharField(max_length=64)
+    last_state = models.BooleanField(default=False)
+
 
 class User(AbstractUser):
     """
