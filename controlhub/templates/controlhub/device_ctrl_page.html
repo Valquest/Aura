@@ -4,7 +4,15 @@
 {% block body %}
 
     <div class="d-flex justify-content-center align-items-center vh-100">
-        <a class="btn btn-primary btn-circle btn-lg rounded-circle mb-2 d-block mx-auto ctrl-btn d-flex align-items-center justify-content-center">ON/OFF</a>
+        {% for device_action in device_actions %}
+            <a class="iot_action_btns btn btn-primary btn-circle btn-lg rounded-circle mb-2 d-block mx-auto ctrl-btn d-flex align-items-center justify-content-center" id="{{ device_action.id }}">
+                {% if device_action.last_state %}
+                OFF
+                {% else %}
+                ON
+                {% endif %}
+            </a>
+        {% endfor %}
     </div>
 
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Device, UserDeviceAccess
+from .models import User, Device, UserDeviceAccess, DeviceAction
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User as DefaultUser
 
@@ -7,6 +7,7 @@ from django.contrib.auth.models import User as DefaultUser
 
 admin.site.register(Device)
 admin.site.register(UserDeviceAccess)
+admin.site.register(DeviceAction)
 
 # Unregister the default User model (if registered)
 try:
