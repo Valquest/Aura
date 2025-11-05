@@ -14,7 +14,7 @@ class Device(models.Model):
     location = models.CharField(max_length=100)
     ip = models.GenericIPAddressField(null=True, blank=True)
     last_seen = models.DateTimeField(auto_now=False, null=True)
-    is_active = models.BooleanField(default=1)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return f"Device |{self.name}| was last seen on {self.last_seen}"
@@ -60,7 +60,7 @@ class DeviceActions(models.Model):
     """
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
     end_point = models.CharField(max_length=64)
-    button_name = models.CharField(max_length=64)
+    action_name = models.CharField(max_length=64)
     last_state = models.BooleanField(default=False)
 
 

@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('model', models.CharField(max_length=50)),
                 ('location', models.CharField(max_length=100)),
                 ('last_seen', models.DateTimeField(null=True)),
-                ('is_active', models.BooleanField(default=1)),
+                ('is_active', models.BooleanField(default=True)),
             ],
         ),
         migrations.CreateModel(

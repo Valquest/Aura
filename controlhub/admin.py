@@ -14,16 +14,12 @@ try:
 except admin.sites.NotRegistered:
     pass
 
-# Define a custom admin class for your User model
+# Define a custom admin class for a custom User model
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
-    # Customize fields to display in the admin list view
+    # Fields to display in the admin list view
     list_display = ('username', 'email', 'type', 'is_staff', 'is_active')
-    # Add search functionality
-    search_fields = ('username', 'email', 'type')
-    # Add filters in the sidebar
-    list_filter = ('type', 'is_staff', 'is_active')
-    # Define fields to show in the edit form
+    # Fields to show in the edit form
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'type')}),
