@@ -2,7 +2,7 @@ import requests
 import random
 import time
 
-from controlhub.models import DeviceActions
+from controlhub.models import DeviceAction
 from django.http import JsonResponse
 from django.shortcuts import HttpResponse
 
@@ -42,7 +42,7 @@ def toggle_device(request, action_id):
         return JsonResponse(response_data, status=400)
 
 def device_status_toggle(action_id, status:bool) -> None:
-    action = DeviceActions.objects.get(id=action_id)
+    action = DeviceAction.objects.get(id=action_id)
     if action.last_state != status:
         action.last_state = status
         action.save()

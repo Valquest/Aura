@@ -54,7 +54,7 @@ class Connection(models.Model):
     def __str__(self):
         return f"{self.outter_node} <-> {self.inner_node}"
 
-class DeviceActions(models.Model):
+class DeviceAction(models.Model):
     """
     This model handles http endpoints and action that was called state
     """

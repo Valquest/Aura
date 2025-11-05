@@ -1,9 +1,13 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from controlhub.models import User, UserDeviceAccess, Device
+from controlhub.models import User, UserDeviceAccess, Device, DeviceAction
 
 def device_ctrl_page(request, device_id):
-    return render(request, 'controlhub/device_ctrl_page.html')
+    device = Device.objects.get(id=device_id)
+    device_actions = DeviceAction.objects.filter(device=device)
+    return render(request, 'controlhub/device_ctrl_page.html', {
+        "device_actions": device_actions,
+    })
 
 def index(request):
     """
