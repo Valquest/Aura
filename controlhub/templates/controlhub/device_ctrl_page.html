@@ -2,17 +2,13 @@
 {% load static %}
 
 {% block body %}
-
     <div class="d-flex justify-content-center align-items-center vh-100">
         {% for device_action in device_actions %}
-            <a class="iot_action_btns btn btn-primary btn-circle btn-lg rounded-circle mb-2 d-block mx-auto ctrl-btn d-flex align-items-center justify-content-center" id="{{ device_action.id }}">
-                {% if device_action.last_state %}
-                OFF
-                {% else %}
-                ON
-                {% endif %}
-            </a>
+            <button class="btn-text-custom iot_action_btns btn btn-primary btn-circle btn-lg rounded-circle mb-2 d-block mx-auto ctrl-btn d-flex align-items-center justify-content-center position-relative" id="{{ device_action.id }}">
+                <span class="btn-text">
+                    {% if device_action.last_state %}OFF{% else %}ON{% endif %}
+                </span>
+            </button>
         {% endfor %}
     </div>
-
 {% endblock %}

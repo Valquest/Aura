@@ -21,28 +21,37 @@ def toggle_device(request, action_id):
 
     random_num = random.randint(1, 9)
 
+    # Case where IoT device is responsive
     if random_num >= 3:
-        device_status_toggle(action_id, True)
+        status = device_status_toggle(action_id)
         response_data = {
-            'status': 'success',
+            'request_status': 'success',
+            'device_action_status': status,
             'message': 'Device toggled successfully',
             'action_id': action_id,
             'random_value': random_num
         }
 
         return JsonResponse(response_data, status=200)
+    # Case where IoT device is non-responsive
     else:
-        device_status_toggle(action_id, False)
+        last_device_status = DeviceAction.objects.get(id=action_id).last_state
         response_data = {
-            'status': 'failure',
+            'request_status': 'failure',
+            'device_action_status': last_device_status,
             'message': 'Device toggled failed',
             'action_id': action_id,
             'random_value': random_num
         }
         return JsonResponse(response_data, status=400)
 
-def device_status_toggle(action_id, status:bool) -> None:
+def device_status_toggle(action_id) -> bool:
     action = DeviceAction.objects.get(id=action_id)
-    if action.last_state != status:
-        action.last_state = status
+    current_state = action.last_state
+    if action.last_state != True:
+        action.last_state = True
         action.save()
+    else:
+        action.last_state = False
+        action.save()
+    return action.last_state
