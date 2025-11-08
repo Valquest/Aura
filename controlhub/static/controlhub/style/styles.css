@@ -1,6 +1,15 @@
-.active-device-nav-item {
-    z-index: 1000; /* Above navbar content */
-    padding-right: 70px;
+#active-device-nav-item {
+    z-index: 10;
+    position: absolute;
+    top: 0.85rem;
+    right: 4.5rem !important;
+    font-size: 14pt;
+    width: auto;
+}
+
+.device-action-container {
+    border-radius: 40px;
+    border: 1px solid rgb(77, 75, 88);
 }
 
 /* Email input: Ensure flat bottom corners */

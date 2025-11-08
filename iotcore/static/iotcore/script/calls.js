@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const buttons = document.querySelectorAll('.iot_action_btns')
+    let activeDevTracker = document.getElementById('active-device-nav-item').
+        querySelector('a');
+    const buttons = document.querySelectorAll('.iot_action_btns');
     buttons.forEach((button) => {
         button.addEventListener('click', async (e) => {
             console.log('Button clicked:', button.id);
@@ -52,6 +54,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     button.disabled = false;
                 }, 600);
 
+
+                if (activeDevTracker.textContent && activeDevTracker.textContent !== '') {  
+                    let activeDevCount = parseInt(activeDevTracker.textContent.split(' ')[0], 10) || 0;
+
+                    activeDevCount = data.device_action_status ? activeDevCount += 1 : activeDevCount -= 1;
+
+                    activeDevTracker.textContent = `${activeDevCount} Active`;
+                }
+                
                 console.log('Success', data);
 
             } catch (error) {

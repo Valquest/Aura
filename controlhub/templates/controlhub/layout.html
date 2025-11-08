@@ -28,8 +28,8 @@
                         <span class="nav-bar-brand-title">Aura</span>
                     </div>
                 </a>
-
-                <div class="active-device-nav-item position-absolute top-2 end-0 me-3">
+                
+                <div class="navbar-brand position-absolute top-2 me-3 end-0" id="active-device-nav-item">
                     <a class="nav-link" href="#">{{ active_device_count }} Active</a>
                 </div>
 
@@ -47,9 +47,6 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link d-none" href="#">{{ active_device_count }} Active</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                         </li>
