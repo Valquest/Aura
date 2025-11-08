@@ -58,9 +58,16 @@ class DeviceAction(models.Model):
     """
     This model handles http endpoints and action that was called state
     """
+
+    TYPE_CHOICES = {
+        ('button','Button'),
+        ('sensor','Sensor'),
+    }
+
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
     end_point = models.CharField(max_length=64)
     action_name = models.CharField(max_length=64)
+    type = models.CharField(max_length=6, null=True)
     last_state = models.BooleanField(default=False)
 
 
@@ -92,6 +99,7 @@ class Stat(models.Model):
     Stores measurements done by MCU (Microcontroller Unit) if MCU outputs
     data
     """
+    action = models.ForeignKey(DeviceAction, on_delete=models.CASCADE, null=True)
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     data = models.JSONField()
