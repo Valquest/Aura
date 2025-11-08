@@ -2,6 +2,23 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from controlhub.models import User, UserDeviceAccess, Device, DeviceAction
 
+def active_devices(request):
+    active_actions = DeviceAction.objects.filter(last_state="True")
+    active_devices = {}
+    for action in active_actions:
+        if action.device.name not in active_devices:
+            active_devices[action.device.name] = {
+                'device': action.device,
+                'count': 1
+            }
+        else:
+            active_devices[action.device.name]['count'] += 1
+
+    context = {
+        'active_devices': active_devices,
+    }
+    return render(request, 'controlhub/active_devices.html', context)
+
 def device_ctrl_page(request, device_id):
     device = Device.objects.get(id=device_id)
     device_actions = DeviceAction.objects.filter(device=device)

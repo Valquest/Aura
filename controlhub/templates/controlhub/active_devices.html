@@ -1,0 +1,33 @@
+{% extends 'controlhub/layout.html' %}
+
+{% block title %}
+    Active Devices
+{% endblock %}
+
+{% block body %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Type</th>
+                <th>Model</th>
+                <th>Active Action Count</th>
+                <th>Device Page</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for device_name, device in active_devices.items %}
+                <tr>
+                    <td>{{ device_name }}</td>
+                    <td>{{ device.device.location }}</td>
+                    <td>{{ device.device.type }}</td>
+                    <td>{{ device.device.model }}</td>
+                    <td>{{ device.count}}</td>
+                    <td><a href="{% url 'device_ctrl_page' device_id=device.device.id %}">link</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+{% endblock %}

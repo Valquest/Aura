@@ -29,8 +29,8 @@
                     </div>
                 </a>
                 
-                <div class="navbar-brand position-absolute top-2 me-3 end-0" id="active-device-nav-item">
-                    <a class="nav-link" href="#">{{ active_device_count }} Active</a>
+                <div class="navbar-brand position-absolute me-3 end-0" id="active-device-nav-item">
+                    <a class="nav-link" href="{% url 'active_devices' %}">{{ active_device_count }} Active</a>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
