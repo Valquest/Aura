@@ -17,7 +17,7 @@ class Device(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"Device |{self.name}| was last seen on {self.last_seen}"
+        return f"Device | {self.name} | was last seen on {self.last_seen}"
 
 class Connection(models.Model):
     """

@@ -10,6 +10,9 @@
         <h1 class="display-6 text-center text-md-start">{{ device_name }}</h1>
     </div>
     <div class="container justify-content-center vh-100 pt-5">
+        {% if not device_actions %}
+            <div>Device has no actions assigned to it.</div>
+        {% endif %}
         {% for device_action in device_actions %}
             <div class="device-action-container row py-2 my-3">
                 <div class="col-5 px-4 py-2">
