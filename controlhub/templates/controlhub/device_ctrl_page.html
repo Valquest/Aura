@@ -25,8 +25,16 @@
                                 <table>
                                     <head>
                                         <tr>Date/Time</tr>
-                                        {% for  %}
+                                            {% for data_key in device_action.stat.data %}
+                                                <tr>data_key.capitalize</tr>
+                                            {% endfor %}
                                     </head>
+                                    <body>
+                                        <td>{{ device_action.stat.timestamp }}</td>
+                                        {% for data_key, item in device_action.stat.data.items %}
+                                            <td>item</td>
+                                        {% endfor %}
+                                    </body>
                                 </table>
                             </div>
                         {% endif %}

@@ -9,7 +9,7 @@ class Device(models.Model):
     """
     mac = models.CharField(max_length=23)
     name = models.CharField(max_length=30)
-    type = models.CharField(max_length=4)
+    type = models.CharField(max_length=4, null=True, blank=True)
     model = models.CharField(max_length=50)
     location = models.CharField(max_length=100)
     ip = models.GenericIPAddressField(null=True, blank=True)
@@ -84,7 +84,7 @@ class User(AbstractUser):
     )
 
     # Defines account type in the system
-    type = models.CharField(max_length=7) # admin, user, creator, guest
+    type = models.CharField(max_length=7, choices=TYPE_CHOICES) # admin, user, creator, guest
 
 class UserDeviceAccess(models.Model):
     """
@@ -102,4 +102,11 @@ class Stat(models.Model):
     action = models.ForeignKey(DeviceAction, on_delete=models.CASCADE, null=True, related_name='action_for_stat')
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
-    data = models.JSONField()
+    data = models.JSONField(null=True, blank=True)
+
+    def clean(self):
+        if self.action and self.action.type != 'sensor':
+            raise ValidationError({
+                'action': "Stat can only be created for a DeviceAction with type 'sensor'."
+            })
+            super().clean()
