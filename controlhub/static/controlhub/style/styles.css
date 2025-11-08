@@ -1,3 +1,8 @@
+.active-device-nav-item {
+    z-index: 1000; /* Above navbar content */
+    padding-right: 70px;
+}
+
 /* Email input: Ensure flat bottom corners */
 #floatingInput {
     border-bottom-left-radius: 0 !important;
@@ -77,6 +82,10 @@ font-size: 1.5rem; /* For icons/emojis inside */
     }
 }
 
+.main_body {
+    margin-top: 50px !important;
+}
+
 .nav-bar-icon {
     width:35px;
     height:35px;
@@ -85,6 +94,7 @@ font-size: 1.5rem; /* For icons/emojis inside */
 
 .nav-bar-brand-title {
     font-size: 21pt;
+    transform: translateY(-3px);
 }
 
 .navbar {
@@ -101,9 +111,8 @@ font-size: 1.5rem; /* For icons/emojis inside */
 }
 
 @keyframes successPop {
-    0% { transform: scale(1); background-color: #0d6efd; border-color: #0d6efd;}
+    0%, 100% { transform: scale(1); background-color: #0d6efd; border-color: #0d6efd;}
     50% { transform: scale(1.05); background-color: #198754; border-color: #198754;}
-    100% { transform: scale(1); background-color: #0d6efd; border-color: #0d6efd;}
 }
 .success {
     animation: successPop 0.6s ease-out;
@@ -111,11 +120,11 @@ font-size: 1.5rem; /* For icons/emojis inside */
 
 @keyframes failureShake {
     0%, 100% { transform: translateX(0); border-color: #dc3545; background-color: #dc3545; }
-    25% { transform: translateX(-1px); }
-    75% { transform: translateX(1px); }
+    25% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
 }
 .failure {
-    animation: failureShake 0.5s ease-in-out;
+    animation: failureShake 1.5s ease-in-out;
     border: 2px solid #dc3545 !important;
 }
 

@@ -23,11 +23,15 @@
         <nav class="navbar navbar-expand-lg fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'index' %}">
-                    <div class="d-flex align-items-center ms-3 my-2">
+                    <div class="d-flex align-items-center ms-3">
                         <img src="{% static 'controlhub/images/logo/Aura-logo-transparent-notext.png' %}" href="{% url 'index' %}" class="nav-bar-icon">
                         <span class="nav-bar-brand-title">Aura</span>
                     </div>
                 </a>
+
+                <div class="active-device-nav-item position-absolute top-2 end-0 me-3">
+                    <a class="nav-link" href="#">{{ active_device_count }} Active</a>
+                </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -44,13 +48,16 @@
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
+                            <a class="nav-link d-none" href="#">{{ active_device_count }} Active</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <main class="py-5">
+        <main class="py-5 main_body">
             {% block body %}
             {% endblock %}
         </div>

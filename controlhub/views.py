@@ -6,7 +6,8 @@ def device_ctrl_page(request, device_id):
     device = Device.objects.get(id=device_id)
     device_actions = DeviceAction.objects.filter(device=device)
     return render(request, 'controlhub/device_ctrl_page.html', {
-        "device_actions": device_actions,
+        'device_actions': device_actions,
+        'device_name': device.name,
     })
 
 def index(request):

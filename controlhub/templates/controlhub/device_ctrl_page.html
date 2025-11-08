@@ -1,8 +1,15 @@
 {% extends 'controlhub/layout.html' %}
 {% load static %}
 
+{% block title %}
+    {{ device_name }}
+{% endblock %}
+
 {% block body %}
-    <div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="container-fluid px-3">
+        <h1 class="display-6 text-center text-md-start">{{ device_name }}</h1>
+    </div>
+    <div class="d-flex justify-content-center vh-100 pt-5">
         {% for device_action in device_actions %}
             <button class="btn-text-custom iot_action_btns btn btn-primary btn-circle btn-lg rounded-circle mb-2 d-block mx-auto ctrl-btn d-flex align-items-center justify-content-center position-relative" id="{{ device_action.id }}">
                 <span class="btn-text">
