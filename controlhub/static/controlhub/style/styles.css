@@ -10,6 +10,12 @@
 .device-action-container {
     border-radius: 40px;
     border: 1px solid rgb(77, 75, 88);
+    margin: 0 5px 0 5px;
+}
+
+.device-action-name {
+    font-size: 12pt;
+    color: rgb(187, 187, 189);
 }
 
 /* Email input: Ensure flat bottom corners */

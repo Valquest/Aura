@@ -12,10 +12,15 @@
     <div class="container justify-content-center vh-100 pt-5">
         {% for device_action in device_actions %}
             <div class="device-action-container row py-2 my-3">
-                <button class="btn-text-custom iot_action_btns btn btn-primary btn-circle btn-lg rounded-circle mb-2 d-block mx-auto ctrl-btn d-flex align-items-center justify-content-center position-relative" id="{{ device_action.id }}">
+                <div class="col-5 px-4 py-2">
+                    <h5 class="device-action-name">{{ device_action.action_name.capitalize }}</h5>
+                </div>
+                <div class="col-7">
+                    <button class="btn-text-custom iot_action_btns btn btn-primary btn-circle btn-lg rounded-circle mb-2 d-block mx-auto ctrl-btn d-flex align-items-center justify-content-center position-relative" id="{{ device_action.id }}">
                     <span class="btn-text">
                         {% if device_action.last_state %}OFF{% else %}ON{% endif %}
                     </span>
+                </div>
                 </button>
             </div>
         {% endfor %}
