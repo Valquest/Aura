@@ -15,16 +15,33 @@
         {% endif %}
         {% for device_action in device_actions %}
             <div class="device-action-container row py-2 my-3">
-                <div class="col-5 px-4 py-2">
-                    <h5 class="device-action-name">{{ device_action.action_name.capitalize }}</h5>
+                <div class="col-6 col-md-5 px-4 py-2 d-flex align-items-start">
+                    <div class="container">
+                        <div class="row">
+                            <h5 class="device-action-name">{{ device_action.action_name.capitalize }}</h5>
+                        </div>
+                        {% if device_action.type == "sensor" %}
+                            <div class="row-12">
+                                <table>
+                                    <head>
+                                        <tr>Date/Time</tr>
+                                        {% for  %}
+                                    </head>
+                                </table>
+                            </div>
+                        {% endif %}
+                    </div>
+                    
                 </div>
-                <div class="col-7">
-                    <button class="btn-text-custom iot_action_btns btn btn-primary btn-circle btn-lg rounded-circle mb-2 d-block mx-auto ctrl-btn d-flex align-items-center justify-content-center position-relative" id="{{ device_action.id }}">
-                    <span class="btn-text">
-                        {% if device_action.last_state %}OFF{% else %}ON{% endif %}
-                    </span>
-                </div>
-                </button>
+                {% if device_action.type == "button" %}
+                    <div class="col-6 col-md-7 d-flex justify-content-end align-items-center">
+                        <button class="btn-text-custom iot_action_btns btn btn-primary btn-circle btn-lg rounded-circle mb-2 ctrl-btn position-relative" id="{{ device_action.id }}">
+                            <span class="btn-text">
+                                {% if device_action.last_state %}OFF{% else %}ON{% endif %}
+                            </span>
+                        </button>
+                    </div>
+                {% endif %}
             </div>
         {% endfor %}
     </div>

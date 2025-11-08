@@ -42,6 +42,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
                         </li>
+                        <li class="nav_item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'active_devices' %}">Active Devices</a>
+                        </li>
                         {% if user.is_superuser %}
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{% url 'admin:index' %}">Admin Page</a>
