@@ -193,30 +193,47 @@ font-size: 1.5rem; /* For icons/emojis inside */
     font-size: 0.875rem;
     border: none;
     width: 100%;
-    margin-top: 20px;
 }
-  
-.minimal-table th, .minimal-table td {
-    border: 1px solid #e0e0e0;
-    padding: 0.5rem;
-}
-  
-.minimal-table th {
-    font-family: 'Courier New', Courier, monospace;
-    background-color: #343a40;
-    color: #ffffff;
-    font-weight: 500;
-    border-bottom: 2px solid #e0e0e0;
-}
-  
+
+.minimal-table th,
 .minimal-table td {
-    background-color: transparent;
+border: 1px solid #e0e0e0;
+padding: 0.5rem;
 }
-  
+
+.minimal-table th {
+font-family: 'Courier New', Courier, monospace;
+background-color: #343a40;
+color: #ffffff;
+font-weight: 500;
+border-bottom: 2px solid #e0e0e0;
+}
+
+.minimal-table td {
+background-color: transparent;
+}
+
 .minimal-table tr {
-    background-color: transparent;
+background-color: transparent;
 }
-  
+
 .minimal-table tr:hover {
-    background-color: #495057;
+background-color: #495057;
+}
+
+@media (max-width: 576px) {
+    .minimal-table {
+        font-size: 0.75rem;
+        margin-left: 0;
+    }
+
+    .minimal-table th,
+    .minimal-table td {
+        padding: 0.3rem;
+    }
+
+    .table-responsive {
+        margin-left: 0;
+        padding-left: 0;
+    }
 }

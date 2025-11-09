@@ -25,17 +25,17 @@
                             <h5 class="device-action-name">{{ device_action.action_name.capitalize }}</h5>
                         </div>
                         {% if device_action.type == "sensor" %}
-                            <div class="row-12">
+                            <div class="col-12">
                                 <table class="table table-dark minimal-table">
-                                    <head>
+                                    <thead>
                                         <tr>
                                             <th>Date/Time</th>
                                             {% for key, _ in device_action.stat_set.first.data.items %}
                                                 <th>{{ key }}</th>
                                             {% endfor %}
                                         </tr>
-                                    </head>
-                                    <body>
+                                    </thead>
+                                    <tbody>
                                         {% for stat in device_action.stat_set.all %}
                                             <tr>
                                                 <td>{{ stat.timestamp }}</td>
@@ -44,7 +44,7 @@
                                                 {% endfor %}
                                             </tr>
                                         {% endfor %}
-                                    </body>
+                                    </tbody>
                                 </table>
                             </div>
                         {% endif %}
