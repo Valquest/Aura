@@ -63,6 +63,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     activeDevTracker.textContent = `${activeDevCount} Active`;
                 }
                 
+                const btn_container = button.parentElement.parentElement
+                if (btn_container.classList.contains('green-border')) {
+                    btn_container.classList.remove('green-border');
+                } else {
+                    btn_container.classList.add('green-border');
+                };
+
                 console.log('Success', data);
 
             } catch (error) {

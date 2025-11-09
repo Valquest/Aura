@@ -17,7 +17,7 @@ class Device(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"Device | {self.name} | was last seen on {self.last_seen}"
+        return f"Device name: {self.name}"
 
 class Connection(models.Model):
     """
@@ -68,8 +68,10 @@ class DeviceAction(models.Model):
     end_point = models.CharField(max_length=64)
     action_name = models.CharField(max_length=64)
     type = models.CharField(max_length=6, null=True, choices=TYPE_CHOICES)
-    stat = models.ForeignKey('Stat', on_delete=models.SET_NULL, null=True, blank=True, related_name='stat_for_action')
     last_state = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'Action name: {self.action_name} | type: {self.type}'
 
 class User(AbstractUser):
     """
@@ -99,14 +101,6 @@ class Stat(models.Model):
     Stores measurements done by MCU (Microcontroller Unit) if MCU outputs
     data
     """
-    action = models.ForeignKey(DeviceAction, on_delete=models.CASCADE, null=True, related_name='action_for_stat')
-    device = models.ForeignKey(Device, on_delete=models.CASCADE)
+    device_action = models.ForeignKey(DeviceAction, on_delete=models.CASCADE, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     data = models.JSONField(null=True, blank=True)
-
-    def clean(self):
-        if self.action and self.action.type != 'sensor':
-            raise ValidationError({
-                'action': "Stat can only be created for a DeviceAction with type 'sensor'."
-            })
-            super().clean()

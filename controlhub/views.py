@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Prefetch
 from django.shortcuts import render, redirect
-from controlhub.models import User, UserDeviceAccess, Device, DeviceAction
+from controlhub.models import User, UserDeviceAccess, Device, DeviceAction, Stat
 
 def active_devices(request):
     active_actions = DeviceAction.objects.filter(last_state="True")
@@ -20,8 +21,17 @@ def active_devices(request):
     return render(request, 'controlhub/active_devices.html', context)
 
 def device_ctrl_page(request, device_id):
+    
     device = Device.objects.get(id=device_id)
-    device_actions = DeviceAction.objects.filter(device=device)
+    
+    # Define the Stat queryset without slicing
+    stat_queryset = Stat.objects.order_by('-timestamp')
+    device_actions = DeviceAction.objects.filter(device=device).prefetch_related(
+        Prefetch(
+            'stat_set',
+            queryset=stat_queryset  # No slicing here
+        )
+    )
     return render(request, 'controlhub/device_ctrl_page.html', {
         'device_actions': device_actions,
         'device_name': device.name,

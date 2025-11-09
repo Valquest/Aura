@@ -10,7 +10,7 @@
 .device-action-container {
     border-radius: 25px;
     border: 1px solid rgb(77, 75, 88);
-    margin: 0 5px 0 5px;
+    margin: 0 5px 0px 5px;
 }
 
 .device-action-name {
@@ -175,10 +175,48 @@ font-size: 1.5rem; /* For icons/emojis inside */
 .table th {
     white-space: nowrap;
     min-width: 7rem;
-  }
+}
 
 @media (max-width: 576px) {
     .table {
       font-size: 13px; /* Smaller font for mobile */
     }
-  }
+}
+
+.green-border {
+    border-color: #418666 !important;
+}
+
+.minimal-table {
+    font-family: 'Courier New', Courier, monospace;
+    color: #666666;
+    font-size: 0.875rem;
+    border: none;
+    width: 100%;
+    margin-top: 20px;
+}
+  
+.minimal-table th, .minimal-table td {
+    border: 1px solid #e0e0e0;
+    padding: 0.5rem;
+}
+  
+.minimal-table th {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #343a40;
+    color: #ffffff;
+    font-weight: 500;
+    border-bottom: 2px solid #e0e0e0;
+}
+  
+.minimal-table td {
+    background-color: transparent;
+}
+  
+.minimal-table tr {
+    background-color: transparent;
+}
+  
+.minimal-table tr:hover {
+    background-color: #495057;
+}
