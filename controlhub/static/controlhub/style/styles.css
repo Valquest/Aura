@@ -168,7 +168,7 @@ font-size: 1.5rem; /* For icons/emojis inside */
     animation: loadingPulse 1.5s ease-in-out infinite;
 }
 
-.table {
+.active_device_table {
     margin: 0 20px 0 20px;
 }
 
@@ -236,4 +236,8 @@ background-color: #495057;
         margin-left: 0;
         padding-left: 0;
     }
+}
+
+.table-responsive-custom-width {
+    padding: 0 !important;
 }

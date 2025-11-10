@@ -21,17 +21,22 @@ def active_devices(request):
     return render(request, 'controlhub/active_devices.html', context)
 
 def device_ctrl_page(request, device_id):
-    
+
     device = Device.objects.get(id=device_id)
     
     # Define the Stat queryset without slicing
-    stat_queryset = Stat.objects.order_by('-timestamp')
     device_actions = DeviceAction.objects.filter(device=device).prefetch_related(
         Prefetch(
             'stat_set',
-            queryset=stat_queryset  # No slicing here
+            queryset=Stat.objects.order_by('-timestamp'),
+            to_attr='prefetched_stats'
         )
     )
+
+    # Limit to first 10 stats per DeviceAction in Python
+    for action in device_actions:
+        action.stat_set_limited = action.prefetched_stats[:10] if action.prefetched_stats else []
+
     return render(request, 'controlhub/device_ctrl_page.html', {
         'device_actions': device_actions,
         'device_name': device.name,
