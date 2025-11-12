@@ -97,4 +97,20 @@ python manage.py createsuperuser
 
 After you create a super user account, you may access the Aura app and login.
 
-After logging in, you need to click "Admin Console" button in the pages header. This will take you to admin console, where you can add devices (Device model), assign actions (DeviceAction model) to them. You will also need to enable devices that your account should be able to see (UserDeviceAccess model).
+After logging in, you need to click "Admin Console" button in the pages header. This will take you to admin console, where you can add devices (Device model), assign actions (DeviceAction model) to them. You will also need to enable devices that your account should be able to see (UserDeviceAccess model). Most fields can be filled out with fake/test information. All device actions with type "button" will perform the toggle http endpoint simulation. All actions with type: "sensor" will allow you to add Stat instances and assign them to a DeviceAction with type "sensor". If you are going to add Stat instances for a device, you will need to add data JSON object, whcih should be structured like so:
+
+example data:
+```json
+{
+    "temp., C": 15,
+    "presure, bar": 4
+}
+```
+
+This craetes a new data point entry with multiple data values. If in future, this device will return multiple sensor data, this can be used in a way presented above.
+
+For "button" type of DeviceAction, you do not need to do any additional steps. Currently all buttons call the simulated http endpoint.
+
+After you finish adding data for testing, you may return to site, and you should see bubbles with device names. Clicking on a bubble will take you to a device page, where you can interact or observe DeviceAction that you have created. Clicking a button will update UI with jacascript and call the endpoint asyncronously.
+
+You can check sensor data for any DeviceAction that you created with type "sensor" and for which you hace added Stat instances. Each instance is a single line of data, so you need to add multiple to see more. In Device page sensor container you can see only last 10 data points.
