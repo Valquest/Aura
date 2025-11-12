@@ -47,7 +47,30 @@ Common Django file, views.py handles all of the logic related to data management
 #### **style.css**
 Common CSS styling file for handling style in HTML page.
 
-#### **images folder**
+#### **images (folder)**
 Stores logo image files.
 
+#### **active_devices.html (template)**
+Active device summary page that shows all the active device activities through which you can quickly find active devices and turn them off if needebe.
+
+#### **device_ctrl_page.html (template)**
+Template that handle each devices action control page. Displays buttons and statisitics for sensors if there are any.
+
+#### **index.html (template)**
+Main page template. Displays all, for that user, accessible devices.
+
+#### **layout.html (template)**
+Main template that all pages uses. Has a header bar, burger menu for mobile.
+
+#### **login.html (template)**
+Handles logging in and redirecting to registration page.
+
+#### **register.html (template)**
+Handles registering in and redirecting to login page.
+
 ### Files (iotcore)
+#### **urls.py**
+Stores a single url endpoint for toggling a simulated device endpoint.
+
+#### **views.py**
+A single view that simulates MCU http request and return either a success (for when device managed to toggle) and failure for when device is not reachable due to poor bandwidth. Failure happens on a random basis, so ***if button blinks red after clicking it, this means random value that fails was selected and this behaviour is normal***.
