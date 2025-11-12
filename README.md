@@ -74,3 +74,27 @@ Stores a single url endpoint for toggling a simulated device endpoint.
 
 #### **views.py**
 A single view that simulates MCU http request and return either a success (for when device managed to toggle) and failure for when device is not reachable due to poor bandwidth. Failure happens on a random basis, so ***if button blinks red after clicking it, this means random value that fails was selected and this behaviour is normal***.
+
+## Running this application
+To run Aura, you need to clone the project from the respository > create a pythons virtual environment > activate the venv > install django.
+
+Project does not have any other dependencies.
+
+First time you will need to run:
+```python
+python manage.py migrate
+```
+
+After you create the db file and migration files with previous command, you need to run the server
+```python
+python manage.py runserver
+```
+
+To do most of the work, you will need a superuser, so run this command and provide the required information in terminal window.
+```python
+python manage.py createsuperuser
+```
+
+After you create a super user account, you may access the Aura app and login.
+
+After logging in, you need to click "Admin Console" button in the pages header. This will take you to admin console, where you can add devices (Device model), assign actions (DeviceAction model) to them. You will also need to enable devices that your account should be able to see (UserDeviceAccess model).
