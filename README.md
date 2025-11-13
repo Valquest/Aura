@@ -75,6 +75,9 @@ Stores a single url endpoint for toggling a simulated device endpoint.
 #### **views.py**
 A single view that simulates MCU http request and return either a success (for when device managed to toggle) and failure for when device is not reachable due to poor bandwidth. Failure happens on a random basis, so ***if button blinks red after clicking it, this means random value that fails was selected and this behaviour is normal***.
 
+#### **static/iotcore/script/calls.js**
+Javascript file to do async http calls to a simulated http endpoint. This script also handles UI changes related with these API calls. Most vissual UI changes are related to updating data without needing to update page, also animated vissual indications for users to know what is happening.
+
 ## Running this application
 To run Aura, you need to clone the project from the respository > create a pythons virtual environment > activate the venv > install django.
 
@@ -114,3 +117,8 @@ For "button" type of DeviceAction, you do not need to do any additional steps. C
 After you finish adding data for testing, you may return to site, and you should see bubbles with device names. Clicking on a bubble will take you to a device page, where you can interact or observe DeviceAction that you have created. Clicking a button will update UI with jacascript and call the endpoint asyncronously.
 
 You can check sensor data for any DeviceAction that you created with type "sensor" and for which you hace added Stat instances. Each instance is a single line of data, so you need to add multiple to see more. In Device page sensor container you can see only last 10 data points.
+
+## Additional comments
+This project uses Python Django, templating, CSS, HTML, JavaScript (with async calls), is unique from other projects shown in this course. 
+
+I really liked the course, found it easier to navigate than CS50 course, which I took a while ago. I know this project is not accepted as completed yet, just wanted to share my appretiation for the course team. Thank you.
