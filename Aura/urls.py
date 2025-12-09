@@ -9,4 +9,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('controlhub/', include('controlhub.urls')),
     path('iotcore/', include('iotcore.urls')),
+    path('family/', include('family.urls')),
 ]

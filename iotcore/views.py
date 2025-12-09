@@ -3,7 +3,6 @@ import time
 
 from controlhub.models import DeviceAction
 from django.http import JsonResponse
-from django.shortcuts import HttpResponse
 
 def toggle_device(request, action_id):
     """
