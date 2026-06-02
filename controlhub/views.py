@@ -1,10 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.db.models import Prefetch
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from controlhub.models import User, UserDeviceAccess, Device, DeviceAction, Stat
 
+@login_required(login_url='login')
 def active_devices(request):
-    active_actions = DeviceAction.objects.filter(last_state="True")
+    active_actions = DeviceAction.objects.filter(last_state=True)
     active_devices = {}
     for action in active_actions:
         if action.device.name not in active_devices:
@@ -20,9 +22,10 @@ def active_devices(request):
     }
     return render(request, 'controlhub/active_devices.html', context)
 
+@login_required(login_url='login')
 def device_ctrl_page(request, device_id):
 
-    device = Device.objects.get(id=device_id)
+    device = get_object_or_404(Device, id=device_id)
     
     # Define the Stat queryset without slicing
     device_actions = DeviceAction.objects.filter(device=device).prefetch_related(
@@ -50,18 +53,12 @@ def index(request):
     # If user is not logged in, redirect to a login page
     if not request.user.is_authenticated:
         return redirect('login')
-    
-    user_access = UserDeviceAccess.objects.filter(user=request.user)
-    print(user_access)
 
-    context = {}
-    context['devices'] = {}
+    user_access = UserDeviceAccess.objects.filter(user=request.user).select_related('device')
 
-    for access in user_access:
-        device_name = Device.objects.get(id=access.device.id).name
-        device_id = Device.objects.get(id=access.device.id).id
-
-        context['devices'][device_id] = device_name
+    context = {
+        'devices': {access.device.id: access.device.name for access in user_access}
+    }
 
     return render(request, 'controlhub/index.html', context)
 
@@ -104,9 +101,9 @@ def register(request):
         password = request.POST.get('password')
         password_reentry = request.POST.get('password_two')
 
-        if username is '' or email is '':
+        if not username or not email or not password:
             context = {
-                'error': 'Must enter username and email'
+                'error': 'Must enter username, email and password'
             }
             return render(request, 'controlhub/register.html', context)
 

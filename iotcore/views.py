@@ -2,9 +2,11 @@ import random
 import time
 
 from controlhub.models import DeviceAction
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import HttpResponse
+from django.shortcuts import get_object_or_404
 
+@login_required
 def toggle_device(request, action_id):
     """
     Simulated IoT device calls
@@ -34,7 +36,10 @@ def toggle_device(request, action_id):
         return JsonResponse(response_data, status=200)
     # Case where IoT device is non-responsive
     else:
-        last_device_status = DeviceAction.objects.get(id=action_id).last_state
+        try:
+            last_device_status = DeviceAction.objects.get(id=action_id).last_state
+        except DeviceAction.DoesNotExist:
+            return JsonResponse({'error': 'Action not found.'}, status=404)
         response_data = {
             'request_status': 'failure',
             'device_action_status': last_device_status,
@@ -45,7 +50,7 @@ def toggle_device(request, action_id):
         return JsonResponse(response_data, status=400)
 
 def device_status_toggle(action_id) -> bool:
-    action = DeviceAction.objects.get(id=action_id)
+    action = get_object_or_404(DeviceAction, id=action_id)
     current_state = action.last_state
     if action.last_state != True:
         action.last_state = True

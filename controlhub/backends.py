@@ -17,15 +17,12 @@ class CustomAuthenticationModelBackend(ModelBackend):
         username_email_lower = username_email.lower()
 
         if '@' in username_email_lower:
-            username = ''
-            email = username_email_lower
+            query = Q(email__iexact=username_email_lower)
         else:
-            email = ''
-            username = username_email_lower
+            query = Q(username__iexact=username_email_lower)
 
         try:
-            # Try username first, then email
-            user = User.objects.get(Q(username__iexact=username) | Q(email__iexact=email))
+            user = User.objects.get(query)
         except User.DoesNotExist:
             # Run the default password hasher once to reduce timing attacks
             User().set_password(password)

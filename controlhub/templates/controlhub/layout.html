@@ -10,7 +10,7 @@
             rel="stylesheet" 
             integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
             crossorigin="anonymous">
-        <link href=" {% static 'controlhub/style/styles.css' %}" 
+        <link href="{% static 'controlhub/style/styles.css' %}"
             rel="stylesheet">
         <title>Aura - {% block title %}{% endblock %}</title>
         <link rel="icon" type="image/x-icon" href="{% static 'controlhub/images/logo/Aura-logo-transparent-notext.png' %}">
@@ -62,7 +62,7 @@
         <main class="py-5 main_body">
             {% block body %}
             {% endblock %}
-        </div>
+        </main>
         {% endif %}
 
         <script 

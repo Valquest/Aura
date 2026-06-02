@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
 
             try {
-                const response = await fetch(`http://127.0.0.1:8000/iotcore/toggle/${button.id}`,
+                const response = await fetch(`/iotcore/toggle/${button.id}`,
                     {
                         method: 'post',
                         headers: {
@@ -55,10 +55,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 }, 600);
 
 
-                if (activeDevTracker.textContent && activeDevTracker.textContent !== '') {  
+                if (activeDevTracker.textContent && activeDevTracker.textContent !== '') {
                     let activeDevCount = parseInt(activeDevTracker.textContent.split(' ')[0], 10) || 0;
 
-                    activeDevCount = data.device_action_status ? activeDevCount += 1 : activeDevCount -= 1;
+                    activeDevCount = data.device_action_status
+                        ? activeDevCount + 1
+                        : Math.max(0, activeDevCount - 1);
 
                     activeDevTracker.textContent = `${activeDevCount} Active`;
                 }
