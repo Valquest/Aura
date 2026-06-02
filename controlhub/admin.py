@@ -1,11 +1,35 @@
 from django.contrib import admin
-from django import forms
-from .models import User, Device, UserDeviceAccess, DeviceAction, Stat
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User as DefaultUser
 
+from .models import Device, DeviceAction, DeviceToken, Stat, User, UserDeviceAccess
 
-# Custom admin for DeviceAction
+
+class DeviceTokenInline(admin.StackedInline):
+    model = DeviceToken
+    extra = 0
+    readonly_fields = ('token', 'created_at', 'last_used')
+    fields = ('token', 'created_at', 'last_used')
+
+    def has_add_permission(self, request, obj=None):
+        if obj and hasattr(obj, 'token'):
+            return False
+        return True
+
+
+@admin.register(Device)
+class DeviceAdmin(admin.ModelAdmin):
+    list_display = ('name', 'mac', 'ip', 'protocol', 'location', 'is_active', 'is_online_display', 'last_seen')
+    list_filter = ('protocol', 'is_active')
+    search_fields = ('name', 'mac', 'ip', 'location')
+    inlines = [DeviceTokenInline]
+
+    def is_online_display(self, obj):
+        return obj.is_online
+    is_online_display.boolean = True
+    is_online_display.short_description = 'Online'
+
+
 @admin.register(DeviceAction)
 class DeviceActionAdmin(admin.ModelAdmin):
     list_display = ('device_name', 'action_name', 'type_display', 'end_point', 'last_state')
@@ -21,13 +45,14 @@ class DeviceActionAdmin(admin.ModelAdmin):
         return obj.get_type_display() if obj.type else 'None'
     type_display.short_description = 'Type'
 
+
 # Unregister the default User model (if registered)
 try:
     admin.site.unregister(DefaultUser)
 except admin.sites.NotRegistered:
     pass
 
-# Custom admin for User model
+
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
     list_display = ('username', 'email', 'type_display', 'is_staff', 'is_active')
@@ -50,6 +75,6 @@ class UserAdmin(BaseUserAdmin):
         return obj.get_type_display() if obj.type else 'None'
     type_display.short_description = 'User Type'
 
+
 admin.site.register(Stat)
-admin.site.register(Device)
 admin.site.register(UserDeviceAccess)

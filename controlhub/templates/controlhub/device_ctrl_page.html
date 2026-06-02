@@ -35,7 +35,7 @@
                                             <tr>
                                                 <th>Date/Time</th>
                                                 {% if device_action.stat_set_limited %}
-                                                    {% for key, _ in device_action.stat_set.first.data.items %}
+                                                    {% for key, _ in device_action.stat_set_limited.0.data.items %}
                                                         <th>{{ key }}</th>
                                                     {% endfor %}
                                                 {% else %}
@@ -43,7 +43,7 @@
                                                 {% endif %}
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody data-action-id="{{ device_action.id }}">
                                             {% for stat in device_action.stat_set_limited %}
                                                 <tr>
                                                     <td>{{ stat.timestamp }}</td>

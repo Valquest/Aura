@@ -11,12 +11,13 @@ Index
         </div>
         <div class="row g-3 justify-content custom-row mx-auto" id="console-row">
             {% for device_id, device_name in devices.items %}
-                <div class="d-flex col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 justify-content-center">
+                <div class="d-flex col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 justify-content-center" data-device-id="{{ device_id }}">
                     <div class="button-item justify-content-center">
                         <a href="{% url 'device_ctrl_page' device_id=device_id %}" class="btn btn-outline-primary btn-circle rounded-circle mb-2 d-block mx-auto" aria-label="{{ device_name }}" id="{{ device_id }}">
                             {{ device_name|slice:":1"|upper }}
                         </a>
-                        <div class="button-label"> {{ device_name|truncatechars:12 }}</div>
+                        <span class="device-status-dot" data-device-id="{{ device_id }}"></span>
+                        <div class="button-label">{{ device_name|truncatechars:12 }}</div>
                     </div>
                 </div>
             {% empty %}

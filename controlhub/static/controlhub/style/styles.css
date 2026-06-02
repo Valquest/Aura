@@ -187,6 +187,18 @@ font-size: 1.5rem; /* For icons/emojis inside */
     border-color: #418666 !important;
 }
 
+.device-status-dot {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #6c757d;
+    margin: 2px auto 4px;
+    transition: background-color 0.4s ease;
+}
+.device-status-dot.online  { background-color: #28a745; }
+.device-status-dot.offline { background-color: #dc3545; }
+
 .minimal-table {
     font-family: 'Courier New', Courier, monospace;
     color: #666666;
